@@ -1,0 +1,45 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("io.micronaut.application") version "2.0.6"
+}
+
+version = "0.1"
+group = "com.example"
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.example.*")
+    }
+}
+
+dependencies {
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("io.swagger.core.v3:swagger-annotations")
+    implementation("javax.annotation:javax.annotation-api")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("io.micronaut:micronaut-validation")
+    annotationProcessor("io.micronaut:micronaut-management:3.0.3")
+    implementation("io.micronaut:micronaut-management:3.0.3")
+}
+
+
+application {
+    mainClass.set("com.example.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("16")
+    targetCompatibility = JavaVersion.toVersion("16")
+}
+
+
+
